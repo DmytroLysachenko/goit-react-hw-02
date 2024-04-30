@@ -1,5 +1,11 @@
 import css from "./Options.module.css";
-export const Options = ({ marks, updateFeedback, resetFeedback }) => {
+export const Options = ({
+  marks,
+  updateFeedback,
+  resetFeedback,
+  total,
+  capFirstLetter,
+}) => {
   return (
     <>
       {marks.map((mark) => {
@@ -9,17 +15,19 @@ export const Options = ({ marks, updateFeedback, resetFeedback }) => {
             key={mark}
             onClick={() => updateFeedback(mark)}
           >
-            {mark}
+            {capFirstLetter(mark)}
           </button>
         );
       })}
-      <button
-        onClick={() => {
-          resetFeedback(marks);
-        }}
-      >
-        Reset
-      </button>
+      {total > 0 && (
+        <button
+          onClick={() => {
+            resetFeedback(marks);
+          }}
+        >
+          Reset
+        </button>
+      )}
     </>
   );
 };
