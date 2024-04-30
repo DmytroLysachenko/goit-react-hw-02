@@ -15,6 +15,14 @@ function App() {
     );
   });
 
+  const updateFeedback = (mark) => {
+    setMarks((prev) => ({ ...prev, [mark]: prev[mark] + 1 }));
+  };
+
+  const resetFeedback = (marks) => {
+    marks.map((mark) => setMarks((prev) => ({ ...prev, [mark]: 0 })));
+  };
+
   useEffect(() => {
     window.localStorage.setItem("data", JSON.stringify(marks));
   }, [marks]);
@@ -35,7 +43,11 @@ function App() {
   return (
     <>
       <Description />
-      <Options marks={Object.keys(marks)} setMarks={setMarks} />
+      <Options
+        marks={Object.keys(marks)}
+        updateFeedback={updateFeedback}
+        resetFeedback={resetFeedback}
+      />
       <Feedback
         marks={marksArray}
         total={total}

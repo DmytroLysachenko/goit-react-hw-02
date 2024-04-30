@@ -1,5 +1,5 @@
 import css from "./Options.module.css";
-export const Options = ({ marks, setMarks }) => {
+export const Options = ({ marks, updateFeedback, resetFeedback }) => {
   return (
     <>
       {marks.map((mark) => {
@@ -7,9 +7,7 @@ export const Options = ({ marks, setMarks }) => {
           <button
             className={css.btn}
             key={mark}
-            onClick={() =>
-              setMarks((prev) => ({ ...prev, [mark]: prev[mark] + 1 }))
-            }
+            onClick={() => updateFeedback(mark)}
           >
             {mark}
           </button>
@@ -17,9 +15,7 @@ export const Options = ({ marks, setMarks }) => {
       })}
       <button
         onClick={() => {
-          marks.map((mark) => {
-            setMarks((prev) => ({ ...prev, [mark]: 0 }));
-          });
+          resetFeedback(marks);
         }}
       >
         Reset
