@@ -1,20 +1,47 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Description } from "./Description/Description";
 import { Feedback } from "./Feedback/Feedback";
 import { Options } from "./Options/Options";
+import { Notification } from "./Notification/Notification";
 
 function App() {
-  const [marks, setMarks] = useState(() => ({
-    good: 0,
-    neutral: 0,
-    bad: 0,
-  }));
+  const [marks, setMarks] = useState(() => {
+    return (
+      JSON.parse(window.localStorage.getItem("data")) ?? {
+        good: 0,
+        neutral: 0,
+        bad: 0,
+      }
+    );
+  });
+
+  useEffect(() => {
+    window.localStorage.setItem("data", JSON.stringify(marks));
+  }, [marks]);
+
+  const marksArray = Object.entries(marks);
+
+  const total = marksArray.reduce((acc, mark) => {
+    return acc + Number(mark[1]);
+  }, 0);
+
+  const totalPositive = marksArray.reduce((acc, mark) => {
+    if (mark[0] !== "Bad") {
+      return acc + mark[1];
+    }
+    return acc;
+  }, 0);
 
   return (
     <>
       <Description />
-      <Options marks={Object.keys(marks)} />
-      <Feedback marks={Object.keys(marks)} values={Object.values(marks)} />
+      <Options marks={Object.keys(marks)} setMarks={setMarks} />
+      <Feedback
+        marks={marksArray}
+        total={total}
+        totalPositive={totalPositive}
+      />
+      <Notification total={total} />
     </>
   );
 }
