@@ -4,9 +4,9 @@ import { Feedback } from "./Feedback/Feedback";
 import { Options } from "./Options/Options";
 import { Notification } from "./Notification/Notification";
 
-export const App = () => {
-  const initialState = { good: 0, neutral: 0, bad: 0 };
+const initialState = { good: 0, neutral: 0, bad: 0 };
 
+export const App = () => {
   const [marks, setMarks] = useState(() => {
     return JSON.parse(window.localStorage.getItem("data")) ?? initialState;
   });
