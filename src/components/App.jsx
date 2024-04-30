@@ -1,15 +1,13 @@
-import { useEffect, useState } from "react";
 import { Description } from "./Description/Description";
 import { Feedback } from "./Feedback/Feedback";
 import { Options } from "./Options/Options";
 import { Notification } from "./Notification/Notification";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const initialState = { good: 0, neutral: 0, bad: 0 };
 
 export const App = () => {
-  const [marks, setMarks] = useState(() => {
-    return JSON.parse(window.localStorage.getItem("data")) ?? initialState;
-  });
+  const [marks, setMarks] = useLocalStorage("data", initialState);
 
   const capFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -22,10 +20,6 @@ export const App = () => {
   const resetFeedback = () => {
     setMarks(initialState);
   };
-
-  useEffect(() => {
-    window.localStorage.setItem("data", JSON.stringify(marks));
-  }, [marks]);
 
   const marksArray = Object.entries(marks);
 
