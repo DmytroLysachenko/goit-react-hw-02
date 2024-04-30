@@ -19,15 +19,7 @@ export const Options = ({
           </button>
         );
       })}
-      {total > 0 && (
-        <button
-          onClick={() => {
-            resetFeedback(marks);
-          }}
-        >
-          Reset
-        </button>
-      )}
+      {total > 0 && <button onClick={() => resetFeedback()}>Reset</button>}
     </>
   );
 };

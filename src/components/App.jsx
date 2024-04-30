@@ -5,14 +5,10 @@ import { Options } from "./Options/Options";
 import { Notification } from "./Notification/Notification";
 
 function App() {
+  const initialState = { good: 0, neutral: 0, bad: 0 };
+
   const [marks, setMarks] = useState(() => {
-    return (
-      JSON.parse(window.localStorage.getItem("data")) ?? {
-        good: 0,
-        neutral: 0,
-        bad: 0,
-      }
-    );
+    return JSON.parse(window.localStorage.getItem("data")) ?? initialState;
   });
   const capFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -21,8 +17,8 @@ function App() {
     setMarks((prev) => ({ ...prev, [mark]: prev[mark] + 1 }));
   };
 
-  const resetFeedback = (marks) => {
-    marks.map((mark) => setMarks((prev) => ({ ...prev, [mark]: 0 })));
+  const resetFeedback = () => {
+    setMarks(initialState);
   };
 
   useEffect(() => {
