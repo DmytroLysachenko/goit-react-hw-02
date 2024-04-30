@@ -4,15 +4,17 @@ import { Feedback } from "./Feedback/Feedback";
 import { Options } from "./Options/Options";
 import { Notification } from "./Notification/Notification";
 
-function App() {
+export const App = () => {
   const initialState = { good: 0, neutral: 0, bad: 0 };
 
   const [marks, setMarks] = useState(() => {
     return JSON.parse(window.localStorage.getItem("data")) ?? initialState;
   });
+
   const capFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
+
   const updateFeedback = (mark) => {
     setMarks((prev) => ({ ...prev, [mark]: prev[mark] + 1 }));
   };
@@ -64,6 +66,4 @@ function App() {
       {total === 0 && <Notification />}
     </>
   );
-}
-
-export default App;
+};
