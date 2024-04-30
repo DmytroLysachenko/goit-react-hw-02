@@ -27,16 +27,7 @@ export const App = () => {
     return acc + Number(mark[1]);
   }, 0);
 
-  const totalPositive = marksArray.reduce((acc, mark) => {
-    if (mark[0] !== "bad") {
-      return acc + mark[1];
-    }
-    return acc;
-  }, 0);
-
-  const positivePercentage = () => {
-    return Math.round((totalPositive / total) * 100);
-  };
+  const positivePercentage = Math.round((marks.good / total) * 100);
 
   return (
     <>
@@ -52,7 +43,6 @@ export const App = () => {
         <Feedback
           marks={marksArray}
           total={total}
-          totalPositive={totalPositive}
           positivePercentage={positivePercentage}
           capFirstLetter={capFirstLetter}
         />

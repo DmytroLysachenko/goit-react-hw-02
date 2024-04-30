@@ -1,9 +1,9 @@
 import css from "./Options.module.css";
 export const Options = ({
+  total,
   marks,
   updateFeedback,
   resetFeedback,
-  total,
   capFirstLetter,
 }) => {
   return (

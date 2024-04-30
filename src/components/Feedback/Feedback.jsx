@@ -14,7 +14,7 @@ export const Feedback = ({
         );
       })}
       <p>Total: {total}</p>
-      <p>Positive: {positivePercentage()}%</p>
+      <p>Positive: {positivePercentage}%</p>
     </>
   );
 };
